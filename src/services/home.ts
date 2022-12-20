@@ -18,13 +18,9 @@ const deleteHome = (inputObject: any) => {
 const updateHome = (inputObject: any) => {
   return Home.findOneAndUpdate({ _id: inputObject._id }, { ...inputObject.input }, { new: true }).then(
     (updateInfo: any) => {
-    console.log("----------------------",updateInfo)
-
       return updateInfo;
     }
   ).catch((e:any)=>{
-    console.log("----------------------",e)
-
   });
 }
 module.exports = {
