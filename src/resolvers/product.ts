@@ -1,35 +1,34 @@
-const {getproductid,getProduct,getCategory,addProduct,addCategory,deletecategory,deleteproduct,updatecategory,updateproduct} = require("../services/product");
+const {
+  getProducts,
+  getCategories,
+  addProduct,
+  addCategory,
+  updateCategory,
+  updateProduct,
+} = require("../services/product");
+
 const product_resolvers = {
-    Query: {
-        getProduct: (_: void, args: any) => {
-            return getProduct(args);
-        },
-        getproductid:(_: void, args: any)=>{
-            return getproductid(args);
-        },
-        getCategory: (_: void, args: any) => {
-            return getCategory(args);
-        }
+  Query: {
+    getProducts: (_: void, args: any) => {
+      return getProducts(args);
     },
-    Mutation: {
-        addProduct: (_:any,inputObject:any) => {
-            return addProduct(inputObject);
-        },
-        addCategory: (_:any,inputObject:any) => {
-            return addCategory(inputObject);
-        },
-        deletecategory: (_:any, inputObject:any) => {
-            return deletecategory(inputObject);
-        },
-        deleteproduct: (_:any, inputObject:any) => {
-            return deleteproduct(inputObject);
-        },
-        updatecategory: (_:any, inputObject:any) => {
-            return updatecategory(inputObject);
-        },
-        updateproduct: (_:any, inputObject:any) => {
-            return updateproduct(inputObject);
-        }
+    getCategories: (_: void, args: any) => {
+      return getCategories(args);
+    },
+  },
+  Mutation: {
+    addProduct: (_: any, inputObject: any) => {
+      return addProduct(inputObject);
+    },
+    updateProduct: (_: any, inputObject: any) => {
+      return updateProduct(inputObject);
+    },
+    addCategory: (_: any, inputObject: any) => {
+      return addCategory(inputObject);
+    },
+    updateCategory: (_: any, inputObject: any) => {
+      return updateCategory(inputObject);
     }
-}
+  },
+};
 export default product_resolvers;

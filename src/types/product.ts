@@ -1,45 +1,55 @@
 import { gql } from 'apollo-server';
 import Product from '../typeModel/product';
 
+
 const product_typeDefs = gql`
 ${Product}
-type categoryid{
-    _id:String!
-    categoryname:String
+
+input ProductIn{
+  _id:String
+  image:String
+  thumbImg:String
+  skuText:String
+  categoryId:[String!]
+  desc:String
+}
+
+type Category {
+  _id:String!
+  name:String
+}
+input CategoryIn {
+  _id:String
+  name:String
+}
+type Categories {
+  _id:String,
+  category:[Category]
+}
+
+type Products {
+  _id:String!,
+  productPage:[Product]
+}
+
+type Query {
+  getProducts:Products
+  getCategories:Categories
+}
+
+type Mutation {
+  addProduct(input:ProductInput):Products!
+  updateProduct(_id:String!,input:ProductInput):Products!
+  addCategory(input:CategoryInput):Categories!
+  updateCategory(_id:String!,input:CategoryInput):Categories!
+}
+
+input ProductInput {
+  productPage:[ProductIn]
 }
 input CategoryInput {
-    categoryname:String!
-}
-type Productpage {
-    _id:String
-    images:String,
-    thumb_img:String,
-    skutext:String,
-    categoryid:categoryid
-    desc:String,
-  }
-  input ProductpageInput {
-    images:String,
-    thumb_img:String,
-    skutext:String,
-    categoryid:String!
-    desc:String,
-  }
-  input ProductInput {
-    Productpage: [ProductpageInput!]
-  }
-type Query{
-    getProduct:[Product]
-    getCategory:[categoryid]
-    getproductid(_id:String): Product
-}
-type Mutation {
-    addCategory(input:CategoryInput):categoryid!
-    addProduct(input:ProductInput):Product!
-    deleteproduct(_id:String!): Product
-    deletecategory(_id:String!): categoryid
-    updatecategory(_id:String!,input:CategoryInput):categoryid!
-    updateproduct(_id:String!,input:ProductInput):Product!
+  category:[CategoryIn]
 }
 `
+
 export default product_typeDefs;
